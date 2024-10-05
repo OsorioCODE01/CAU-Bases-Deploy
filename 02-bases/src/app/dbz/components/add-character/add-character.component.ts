@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-add-character',
+  selector: 'dbz-add-character',
   templateUrl: './add-character.component.html',
-  styleUrl: './add-character.component.css'
+  styleUrl: './add-character.component.css',
 })
-export class AddCharacterComponent {
-
-}
+export class AddCharacterComponent {}
