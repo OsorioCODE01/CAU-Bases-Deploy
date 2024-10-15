@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DbzService } from '../services/dbz.service';
 import { Character } from '../interfaces/characters.interface';
 
 @Component({
@@ -6,23 +7,15 @@ import { Character } from '../interfaces/characters.interface';
   templateUrl: './main-page.component.html',
 })
 export class MainPageComponent {
-  public characters: Character[] = [
-    {
-      name: 'Krillin',
-      power: 1000,
-    },
-    { name: 'Goku', power: 9500 },
-    {
-      name: 'Vegetta',
-      power: 7500,
-    },
-  ];
-
-  onNewCharacter(character: Character): void {
-    this.characters.push(character);
+  //Aqui ocurre la inyeccion de dependecias para usar el contenido del servicio
+  constructor(private dbzService: DbzService) {}
+  get characters(): Character[] {
+    return [...this.dbzService.characters]; // con esto lo que tengo es una copia de los personajes presentes en el servicio
   }
-
-  onDelete(index: number): void {
-    this.characters.splice(index, 1);
+  onDeleteCharacter(id: string): void {
+    this.dbzService.deleteCharacterById(id);
+  }
+  onNewCharacter(character: Character): void {
+    this.dbzService.addCharacter(character);
   }
 }
